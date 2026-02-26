@@ -1,6 +1,4 @@
 """Relevance scoring engine for compliance changes."""
-import re
-from typing import Dict, List
 
 from app.models import ImpactLevel
 
@@ -132,7 +130,7 @@ class RelevanceEngine:
         return ImpactLevel.LOW.value
 
     @staticmethod
-    def identify_services(title: str, summary: str) -> List[str]:
+    def identify_services(title: str, summary: str) -> list[str]:
         """
         Identify which CXC service lines are impacted.
 
@@ -155,7 +153,7 @@ class RelevanceEngine:
     @staticmethod
     def score_change(
         title: str, summary: str, change_type: str, legal_domain: str
-    ) -> Dict[str, any]:
+    ) -> dict[str, any]:
         """
         Score a compliance change for relevance.
 

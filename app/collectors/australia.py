@@ -1,6 +1,5 @@
 """Australia compliance collector."""
 from datetime import datetime
-from typing import List
 
 from app.collectors.base import BaseCollector, ComplianceChangeData
 
@@ -8,7 +7,7 @@ from app.collectors.base import BaseCollector, ComplianceChangeData
 class AustraliaCollector(BaseCollector):
     """Collector for Australian compliance changes."""
 
-    def get_sources(self) -> List[dict]:
+    def get_sources(self) -> list[dict]:
         """Get Australian authoritative sources."""
         return [
             {
@@ -23,7 +22,7 @@ class AustraliaCollector(BaseCollector):
             },
         ]
 
-    def collect(self) -> List[ComplianceChangeData]:
+    def collect(self) -> list[ComplianceChangeData]:
         """
         Collect Australian compliance changes.
 

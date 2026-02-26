@@ -1,6 +1,5 @@
 """Database utilities."""
 from datetime import datetime
-from typing import List, Optional
 
 from sqlalchemy.orm import Session
 
@@ -12,13 +11,13 @@ from app.relevance import RelevanceEngine
 def get_db_session(database_url: str = "sqlite:///compliance.db") -> Session:
     """Get database session."""
     engine = get_engine(database_url)
-    SessionMaker = get_session_maker(engine)
-    return SessionMaker()
+    session_maker = get_session_maker(engine)
+    return session_maker()
 
 
 def save_compliance_change(
     session: Session, change_data: ComplianceChangeData
-) -> Optional[ComplianceChange]:
+) -> ComplianceChange | None:
     """
     Save compliance change to database (idempotent).
 
@@ -82,7 +81,7 @@ def create_scan_run(session: Session) -> ScanRun:
 
 
 def complete_scan_run(
-    session: Session, scan_run_id: int, items_found: int, failures: Optional[str] = None
+    session: Session, scan_run_id: int, items_found: int, failures: str | None = None
 ):
     """Complete a scan run."""
     scan_run = session.query(ScanRun).filter(ScanRun.id == scan_run_id).first()
@@ -95,9 +94,9 @@ def complete_scan_run(
 
 
 def get_latest_changes(
-    session: Session, limit: int = 50, country: Optional[str] = None,
-    domain: Optional[str] = None, impact: Optional[str] = None
-) -> List[ComplianceChange]:
+    session: Session, limit: int = 50, country: str | None = None,
+    domain: str | None = None, impact: str | None = None
+) -> list[ComplianceChange]:
     """Get latest compliance changes with optional filters."""
     query = session.query(ComplianceChange).order_by(ComplianceChange.retrieved_at.desc())
 
@@ -111,7 +110,7 @@ def get_latest_changes(
     return query.limit(limit).all()
 
 
-def get_high_impact_changes(session: Session, limit: int = 20) -> List[ComplianceChange]:
+def get_high_impact_changes(session: Session, limit: int = 20) -> list[ComplianceChange]:
     """Get high-impact compliance changes."""
     return (
         session.query(ComplianceChange)

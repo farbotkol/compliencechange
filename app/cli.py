@@ -1,6 +1,5 @@
 """Command-line interface for compliance monitoring."""
 import sys
-from datetime import datetime
 
 from app.collectors.australia import AustraliaCollector
 from app.collectors.european_union import EuropeanUnionCollector
@@ -62,7 +61,7 @@ def run_scan():
     complete_scan_run(session, scan_run.id, items_found, failure_text)
 
     print(f"\n{'='*60}")
-    print(f"Scan completed!")
+    print("Scan completed!")
     print(f"  Items found: {items_found}")
     print(f"  Failures: {len(failures)}")
     if failures:

@@ -1,8 +1,6 @@
 """Tests for collectors."""
 from datetime import datetime
 
-import pytest
-
 from app.collectors.australia import AustraliaCollector
 from app.collectors.base import ComplianceChangeData
 from app.collectors.european_union import EuropeanUnionCollector

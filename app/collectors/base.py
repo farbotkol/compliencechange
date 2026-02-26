@@ -3,7 +3,6 @@ import hashlib
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from datetime import datetime
-from typing import List, Optional
 
 import httpx
 from bs4 import BeautifulSoup
@@ -21,8 +20,8 @@ class ComplianceChangeData:
     summary: str
     source_url: str
     publisher: str
-    published_date: Optional[datetime]
-    effective_date: Optional[datetime]
+    published_date: datetime | None
+    effective_date: datetime | None
     evidence_text: str
 
     def get_evidence_hash(self) -> str:
@@ -47,7 +46,7 @@ class BaseCollector(ABC):
         )
 
     @abstractmethod
-    def get_sources(self) -> List[dict]:
+    def get_sources(self) -> list[dict]:
         """
         Get list of authoritative sources for this jurisdiction.
 
@@ -57,7 +56,7 @@ class BaseCollector(ABC):
         pass
 
     @abstractmethod
-    def collect(self) -> List[ComplianceChangeData]:
+    def collect(self) -> list[ComplianceChangeData]:
         """
         Collect compliance changes from sources.
 
@@ -66,7 +65,7 @@ class BaseCollector(ABC):
         """
         pass
 
-    async def fetch_url(self, url: str) -> Optional[str]:
+    async def fetch_url(self, url: str) -> str | None:
         """
         Fetch content from URL.
 

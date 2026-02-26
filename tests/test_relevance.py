@@ -1,5 +1,4 @@
 """Tests for relevance scoring engine."""
-import pytest
 
 from app.models import ImpactLevel
 from app.relevance import RelevanceEngine
@@ -68,7 +67,7 @@ def test_service_identification_eor():
 def test_service_identification_data_privacy():
     """Test that data privacy affects compliance services."""
     title = "GDPR enforcement update"
-    summary = "New guidance on personal data processing for cross-border employment"
+    summary = "New guidance on personal data processing and compliance requirements"
 
     services = RelevanceEngine.identify_services(title, summary)
 

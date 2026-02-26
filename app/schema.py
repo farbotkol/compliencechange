@@ -1,8 +1,7 @@
 """Pydantic schemas for API."""
 from datetime import datetime
-from typing import Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class ComplianceChangeResponse(BaseModel):
@@ -12,14 +11,14 @@ class ComplianceChangeResponse(BaseModel):
     jurisdiction: str
     country_code: str
     legal_domain: str
-    service_impacted: Optional[str]
+    service_impacted: str | None
     change_type: str
     title: str
     summary: str
     source_url: str
     publisher: str
-    published_date: Optional[datetime]
-    effective_date: Optional[datetime]
+    published_date: datetime | None
+    effective_date: datetime | None
     retrieved_at: datetime
     impact_level: str
     evidence_text: str
@@ -34,9 +33,9 @@ class ScanRunResponse(BaseModel):
 
     id: int
     start_time: datetime
-    end_time: Optional[datetime]
+    end_time: datetime | None
     items_found: int
-    failures: Optional[str]
+    failures: str | None
     status: str
 
     class Config:

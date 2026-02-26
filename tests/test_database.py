@@ -1,8 +1,6 @@
 """Tests for database operations and idempotency."""
 from datetime import datetime
 
-import pytest
-
 from app.collectors.base import ComplianceChangeData
 from app.db import save_compliance_change
 from app.models import ComplianceChange

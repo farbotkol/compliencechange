@@ -1,11 +1,9 @@
 """FastAPI application for compliance monitoring."""
 import csv
 import io
-from typing import List, Optional
 
 from fastapi import FastAPI, Query
 from fastapi.responses import HTMLResponse, StreamingResponse
-from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.requests import Request
 
@@ -58,7 +56,7 @@ async def health():
     )
 
 
-@app.get("/changes/latest", response_model=List[ComplianceChangeResponse])
+@app.get("/changes/latest", response_model=list[ComplianceChangeResponse])
 async def get_changes_latest(limit: int = Query(50, le=100)):
     """Get latest compliance changes."""
     session = get_db_session()
@@ -67,11 +65,11 @@ async def get_changes_latest(limit: int = Query(50, le=100)):
     return changes
 
 
-@app.get("/changes", response_model=List[ComplianceChangeResponse])
+@app.get("/changes", response_model=list[ComplianceChangeResponse])
 async def get_changes(
-    country: Optional[str] = None,
-    domain: Optional[str] = None,
-    impact: Optional[str] = None,
+    country: str | None = None,
+    domain: str | None = None,
+    impact: str | None = None,
     limit: int = Query(50, le=100),
 ):
     """Get compliance changes with filters."""
@@ -104,7 +102,7 @@ async def trigger_scan():
     )
 
 
-@app.get("/alerts/high-impact", response_model=List[ComplianceChangeResponse])
+@app.get("/alerts/high-impact", response_model=list[ComplianceChangeResponse])
 async def get_high_impact_alerts(limit: int = Query(20, le=100)):
     """Get high-impact compliance alerts."""
     session = get_db_session()
@@ -115,9 +113,9 @@ async def get_high_impact_alerts(limit: int = Query(20, le=100)):
 
 @app.get("/export/changes.csv")
 async def export_changes_csv(
-    country: Optional[str] = None,
-    domain: Optional[str] = None,
-    impact: Optional[str] = None,
+    country: str | None = None,
+    domain: str | None = None,
+    impact: str | None = None,
 ):
     """Export compliance changes as CSV."""
     session = get_db_session()
