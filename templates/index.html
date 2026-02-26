@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+        .disclaimer {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+        .disclaimer strong {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .filters {
+            background: white;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .filters h2 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        .filter-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .filter-group select, .filter-group input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        .changes-list {
+            margin: 2rem 0;
+        }
+        .change-card {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .change-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .change-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .change-title {
+            flex: 1;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .badges {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .badge-high {
+            background: #dc3545;
+            color: white;
+        }
+        .badge-medium {
+            background: #ffc107;
+            color: #333;
+        }
+        .badge-low {
+            background: #28a745;
+            color: white;
+        }
+        .badge-enacted {
+            background: #007bff;
+            color: white;
+        }
+        .badge-proposed {
+            background: #6c757d;
+            color: white;
+        }
+        .badge-guidance {
+            background: #17a2b8;
+            color: white;
+        }
+        .change-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+            flex-wrap: wrap;
+        }
+        .change-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        .change-summary {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        .change-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .change-footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .change-footer a:hover {
+            text-decoration: underline;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #666;
+        }
+        .empty-state h3 {
+            margin-bottom: 1rem;
+        }
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>🌐 {{ title }}</h1>
+            <p class="subtitle">Monitoring compliance and legislative changes globally</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="disclaimer">
+            <strong>⚠️ Disclaimer</strong>
+            This tool provides informational monitoring only and does not constitute legal advice. 
+            Please consult with legal professionals for specific compliance requirements.
+        </div>
+
+        <div class="filters">
+            <h2>🔍 Filter Changes</h2>
+            <form method="get" action="/">
+                <div class="filter-group">
+                    <div>
+                        <label for="country">Country</label>
+                        <select id="country" name="country">
+                            <option value="">All Countries</option>
+                            <option value="AU">Australia</option>
+                            <option value="EU">European Union</option>
+                            <option value="UK">United Kingdom</option>
+                            <option value="US">United States</option>
+                            <option value="INTL">International</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="domain">Legal Domain</label>
+                        <select id="domain" name="domain">
+                            <option value="">All Domains</option>
+                            <option value="employment_law">Employment Law</option>
+                            <option value="tax">Tax</option>
+                            <option value="payroll">Payroll</option>
+                            <option value="data_privacy">Data Privacy</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="impact">Impact Level</label>
+                        <select id="impact" name="impact">
+                            <option value="">All Levels</option>
+                            <option value="HIGH">High</option>
+                            <option value="MEDIUM">Medium</option>
+                            <option value="LOW">Low</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="changes-list">
+            <h2 style="margin-bottom: 1rem;">📋 Recent Changes ({{ changes|length }})</h2>
+            
+            {% if changes %}
+                {% for change in changes %}
+                <div class="change-card">
+                    <div class="change-header">
+                        <div class="change-title">{{ change.title }}</div>
+                        <div class="badges">
+                            {% if change.impact_level == 'HIGH' %}
+                            <span class="badge badge-high">High Impact</span>
+                            {% elif change.impact_level == 'MEDIUM' %}
+                            <span class="badge badge-medium">Medium Impact</span>
+                            {% else %}
+                            <span class="badge badge-low">Low Impact</span>
+                            {% endif %}
+                            
+                            {% if 'ENACTED' in change.change_type %}
+                            <span class="badge badge-enacted">✅ Enacted</span>
+                            {% elif 'PROPOSED' in change.change_type %}
+                            <span class="badge badge-proposed">⚠️ Proposed</span>
+                            {% else %}
+                            <span class="badge badge-guidance">ℹ️ Guidance</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="change-meta">
+                        <span>📍 {{ change.jurisdiction }} ({{ change.country_code }})</span>
+                        <span>📂 {{ change.legal_domain.replace('_', ' ').title() }}</span>
+                        {% if change.service_impacted %}
+                        <span>🎯 {{ change.service_impacted }}</span>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="change-summary">{{ change.summary }}</div>
+                    
+                    <div class="change-footer">
+                        <div>
+                            <strong>Publisher:</strong> {{ change.publisher }}<br>
+                            {% if change.published_date %}
+                            <strong>Published:</strong> {{ change.published_date.strftime('%Y-%m-%d') }}
+                            {% endif %}
+                        </div>
+                        <a href="{{ change.source_url }}" target="_blank" rel="noopener">View Source →</a>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <h3>No changes found</h3>
+                    <p>Try running a scan to collect compliance changes.</p>
+                    <p style="margin-top: 1rem;"><code>python -m app.cli run-scan</code></p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>CXC Global Compliance Intelligence v0.1.0</p>
+            <p style="margin-top: 0.5rem; opacity: 0.8;">
+                <a href="/health" style="color: white;">Health Check</a> | 
+                <a href="/changes/latest" style="color: white;">API</a> | 
+                <a href="/export/changes.csv" style="color: white;">Export CSV</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
