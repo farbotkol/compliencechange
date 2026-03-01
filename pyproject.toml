@@ -1,0 +1,43 @@
+[project]
+name = "cxc-global-compliance-intelligence"
+version = "0.1.0"
+description = "Compliance and legislative change intelligence monitoring for CXC Global"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.109.1",
+    "uvicorn[standard]>=0.27.0",
+    "sqlalchemy>=2.0.25",
+    "alembic>=1.13.1",
+    "httpx>=0.26.0",
+    "beautifulsoup4>=4.12.3",
+    "lxml>=5.1.0",
+    "pydantic>=2.5.3",
+    "pydantic-settings>=2.1.0",
+    "python-multipart>=0.0.22",
+    "jinja2>=3.1.3",
+    "pyyaml>=6.0.1",
+    "python-dateutil>=2.8.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.4",
+    "pytest-asyncio>=0.23.3",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.1.13",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+asyncio_mode = "auto"

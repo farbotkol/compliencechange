@@ -1,0 +1,43 @@
+# Data sources configuration
+# This file can be used to configure external data sources for collectors
+
+sources:
+  australia:
+    - url: "https://www.fairwork.gov.au/newsroom/news"
+      name: "Fair Work Ombudsman"
+      type: "employment_law"
+    - url: "https://www.ato.gov.au/About-ATO/New-legislation/"
+      name: "Australian Taxation Office"
+      type: "tax"
+  
+  european_union:
+    - url: "https://ec.europa.eu/social/main.jsp?catId=157&langId=en"
+      name: "European Commission - Employment"
+      type: "employment_law"
+    - url: "https://edpb.europa.eu/news/news_en"
+      name: "European Data Protection Board"
+      type: "data_privacy"
+  
+  united_kingdom:
+    - url: "https://www.gov.uk/government/organisations/hm-revenue-customs"
+      name: "HM Revenue & Customs"
+      type: "tax"
+    - url: "https://www.gov.uk/government/organisations/department-for-business-and-trade"
+      name: "Department for Business and Trade"
+      type: "employment_law"
+  
+  united_states:
+    - url: "https://www.dol.gov/newsroom/releases"
+      name: "US Department of Labor"
+      type: "employment_law"
+    - url: "https://www.irs.gov/newsroom"
+      name: "Internal Revenue Service"
+      type: "tax"
+  
+  international:
+    - url: "https://www.ilo.org/global/about-the-ilo/newsroom/lang--en/index.htm"
+      name: "International Labour Organization"
+      type: "employment_law"
+    - url: "https://www.oecd.org/tax/"
+      name: "OECD"
+      type: "tax"
